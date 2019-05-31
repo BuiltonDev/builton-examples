@@ -1,5 +1,5 @@
 'use strict';
-const fetch = require('node-fetch');
+const fetch = require('./node_modules/node-fetch/lib');
 const utils = require('./utils');
 
 module.exports.user_created = async (event) => {
@@ -14,9 +14,7 @@ module.exports.user_created = async (event) => {
             text: `New signup! ${user.first_name} ${user.last_name} (${user.email})`
           })
         });
-        console.log(response);
       } catch (err) {
-        console.error(err);
         return {
           statusCode: 500,
           err
@@ -25,7 +23,6 @@ module.exports.user_created = async (event) => {
     }
   } else {
     const err = 'Could not verify the signature';
-    console.error(err);
     return {
       statusCode: 500,
       err
