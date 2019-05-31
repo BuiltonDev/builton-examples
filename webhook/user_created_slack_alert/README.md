@@ -15,7 +15,7 @@ In order to run this example locally, you need to:
 
 4. Create a [Slack App](https://api.slack.com/apps), add the "incoming webhooks" feature, and create a webhook for your app. You can find more information on how to do that on the [Slack documentation](https://api.slack.com/incoming-webhooks)
 
-5. Create a Builton Webhook on your dashboard.
+5. Create a Builton Webhook on your dashboard with the event type `user.created`.
 
 6. Add a `secrets.dev.json` file containing your Builton Webhook Secret and your Slack URL. You can use the `secrets.example.json` as a template.
 
