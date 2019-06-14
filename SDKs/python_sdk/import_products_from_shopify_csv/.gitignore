@@ -1,0 +1,7 @@
+# Virtual Env directories
+venv.*
+
+
+# Secrets
+#secrets.*.json
+#!secrets.example.json
