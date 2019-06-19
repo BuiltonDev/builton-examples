@@ -2,6 +2,7 @@ import csv
 
 from builton_sdk import Builton
 from settings import CSV_DELIMITER, API_KEY, BEARER_TOKEN
+from termcolor import cprint
 
 """
     MAPPING: Shopify and BuiltOn Product
@@ -47,20 +48,24 @@ def import_products(builton: Builton):
             }
 
             tags = [tag for tag in shopify_product.get('Tags').split(',')]
+            tags.append(shopify_product.get('Type'))
 
             body = {
                 'active': parse_boolean_param(shopify_product.get('Published')),
                 'name': shopify_product.get('Title'),
                 'description': shopify_product.get('Body (HTML)'),
-                'price': shopify_product.get('Variant Price'),
+                'price': float(shopify_product.get('Variant Price')),
                 'external_reference': shopify_product.get('Handle'),
                 'tags': tags,
                 'properties': properties,
                 'image_url': shopify_product.get('Image Src')
             }
 
-            builton.product().create(body=body)
-            break
+            try:
+                builton.product().create(body=body)
+            except Exception as error:
+                cprint("something wrong happened: %s" % error, "orange")
+                continue
 
 
 def parse_boolean_param(param):
