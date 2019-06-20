@@ -12,16 +12,18 @@ In order to run this example locally, you need to:
 
 1. Clone this repository, and run `pip install -r requirements.txt`
 
-    1.1 You can also create a Virtual Environment: `python3 -m venv venv`
+    1.1. You can also create a Virtual Environment: `python3 -m venv venv`
 
     Info: The name must start by *venv*
 
+    1.2. Then active the virtual environment: `source ./venv_name/bin/activate`
+
 2. There is two ways to run the script: `import_products.py`
 
-    2.1 Run the script and add the BuiltOn API Key and the SA Key  when it asks
+    2.1. Run the script and add the BuiltOn API Key and the SA Key  when it asks
 
     Run: `python import_products`
 
-    2.2 Add and define the BuiltOn API Key and SA Key to a `settings.py` file. You can use the `setting_example.py` as a template
+    2.2. Add and define the BuiltOn API Key and SA Key to a `settings.py` file. You can use the `setting_example.py` as a template
 
     Run: `python import_products skip_keys`
