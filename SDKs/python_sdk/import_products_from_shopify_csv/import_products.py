@@ -13,7 +13,7 @@ from termcolor import cprint
     Body (HTML)         |   description
     Handle              |   external_reference
     Vendor              |   properties['vendor']
-    Type                |   properties or tags?
+    Type                |   tags
     Tags                |   tags
     Published           |   active
     Variant Price       |   price
