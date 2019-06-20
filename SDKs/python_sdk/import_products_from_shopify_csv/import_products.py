@@ -32,7 +32,7 @@ def main(api_key=None, bearer_token=None):
     api_key = api_key if api_key is not None else API_KEY
     bearer_token = bearer_token if bearer_token is not None else BEARER_TOKEN
 
-    builton = Builton(api_key=api_key, bearer_token=bearer_token, endpoint="https://qa.kvass.ai")
+    builton = Builton(api_key=api_key, bearer_token=bearer_token)
     cprint("BuiltOn skd is ready!", "cyan")
 
     import_products(builton)
