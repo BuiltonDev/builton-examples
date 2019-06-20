@@ -5,4 +5,5 @@ venv.*
 
 # Secrets
 settings.json
+settings.*.json
 !settings.example.json
