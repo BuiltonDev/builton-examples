@@ -1,4 +1,5 @@
 import csv
+import sys
 
 from builton_sdk import Builton
 from settings import CSV_DELIMITER, API_KEY, BEARER_TOKEN
@@ -114,10 +115,17 @@ def parse_boolean_param(param):
 
 if __name__ == "__main__":
     cprint("Let's do it!", "cyan")
-    api_key = input("Your API Key:")
-    bearer_token = input("Your Service Account Key:")
 
-    api_key = None if not api_key else api_key
-    bearer_token = None if not bearer_token else bearer_token
+    if len(sys.argv) == 1:
+        cprint("Run normal mode", "white")
 
-    main(api_key, bearer_token)
+        api_key = input("Your API Key:")
+        bearer_token = input("Your Service Account Key:")
+        main(api_key, bearer_token)
+
+    if sys.argv[1] == 'skip_keys':
+        cprint("Run with the settings file", "white")
+        main()
+    else:
+        cprint("Wrong argument :( | Argument: %s " % sys.argv[1], "yellow")
+
