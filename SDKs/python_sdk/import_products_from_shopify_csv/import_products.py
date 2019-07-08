@@ -34,7 +34,7 @@ def main(api_key=None, bearer_token=None):
     bearer_token = bearer_token if bearer_token is not None else BEARER_TOKEN
 
     builton = Builton(api_key=api_key, bearer_token=bearer_token)
-    cprint("BuiltOn skd is ready!", "cyan")
+    cprint("BuiltOn SDK is ready!", "cyan")
 
     import_products(builton)
 
@@ -60,7 +60,7 @@ def import_products(builton: Builton):
                 }
 
                 cprint("=========================== Tags ===========================")
-                tags = [tag for tag in shopify_product.get('Tags').split(',')]
+                tags = shopify_product.get('Tags').split(',')
                 tags.append(shopify_product.get('Type'))
                 cprint("Tags: %s" % tags, "cyan")
 
@@ -108,7 +108,8 @@ def import_products(builton: Builton):
 def parse_boolean_param(param):
     if param is None:
         return param
-    if (isinstance(param, int) and param == 1) or (param.strip().lower() in ['1', 'true']):
+    param = str(param)
+    if param.strip().lower() in ['1', 'true']:
         return True
     return False
 
