@@ -13,7 +13,7 @@ In order to run this example locally, you need to:
 
 3. Set up your AWS Credentials. [More information here](https://serverless.com/framework/docs/providers/aws/guide/credentials/).
 
-4. Create a [Twilio account](https://www.twilio.com/), create a [Twilio Sandbox for WhatsApp](https://www.twilio.com/console/sms/whatsapp/learn) and join the sandbox by following the insctructions.
+4. Create a [Twilio account](https://www.twilio.com/), create a [Twilio Sandbox for WhatsApp](https://www.twilio.com/console/sms/whatsapp/learn) and join the sandbox by following the instructions.
 
 5. Create a Builton Webhook on your dashboard with the event type `user.created`.
 
