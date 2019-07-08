@@ -1,0 +1,9 @@
+{
+  "name": "user_created_whatsapp_hello",
+  "dependencies": {
+    "twilio": "^3.33.0"
+  },
+  "devDependencies": {
+    "serverless-offline": "^4.10.6"
+  }
+}
