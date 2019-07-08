@@ -1,6 +1,6 @@
 # User Created > Slack Alert
 
-This example demonstrates how to send yourself a Slack Alert whenever a new user registers to your BuiltOn company.
+This example demonstrates how to send yourself a Slack Alert whenever a new user registers to your company on Builton.
 It uses the [BuiltOn](https://builton.dev) webhooks, a custom [Slack App](https://api.slack.com/apps) and the [Serverless](https://serverless.com) framework to create an [AWS Lambda](https://aws.amazon.com/lambda/) function.
 
 # Install Locally
@@ -19,4 +19,4 @@ In order to run this example locally, you need to:
 
 6. Add a `secrets.dev.json` file containing your Builton Webhook Secret and your Slack URL. You can use the `secrets.example.json` as a template.
 
-7. Run `serverless offline` to run the service locally or `serverless deploy` to run it on AWS.
+7. Use `serverless offline` to run the service locally or `serverless deploy` to run it on AWS.
