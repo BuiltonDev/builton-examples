@@ -11,7 +11,7 @@
 #
 # Happy Coding!
 
-service: user_created_slack_alert
+service: user-created-slack-alert
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
