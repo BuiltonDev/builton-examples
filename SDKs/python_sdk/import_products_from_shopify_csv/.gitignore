@@ -1,0 +1,9 @@
+# Virtual Env directories
+venv
+venv.*
+
+
+# Secrets
+settings.json
+settings.*.json
+!settings.example.json
