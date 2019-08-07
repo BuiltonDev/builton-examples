@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Builton SCA Example</title>
+    <script src="https://unpkg.com/unfetch/polyfill"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+
+<body>
+    <div id="container-success" class="container" style="display:none;">
+        <h3>Success</h3>
+        <p id="success-message">Authentication of payment successful.</p>
+    </div>
+
+    <div id="container-error" class="container" style="display:none;">
+        <h3>Something went wrong</h3>
+        <p id="error-message">Authentication of payment failed.</p>
+    </div>
+</body>
+<script>
+    const CONFIG = {
+      STRIPE_API_KEY: 'YOUR_STRIPE_PUBLISHABLE_API_KEY'
+    };
+
+    // Expects PAYMENT_INTENT_CLIENT_SECRET and PAYMENT_ID in the url as query parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const paymentIntentSecret = urlParams.get('PAYMENT_INTENT_CLIENT_SECRET');
+    const paymentId = urlParams.get('PAYMENT_ID')
+
+    if (!paymentIntentSecret) {
+      document.getElementById('error-message').innerHTML = 'Missing required payment intent secret. Please use the full url provided.';
+      document.getElementById('container-error').style.display = 'block';
+    }
+
+    const stripe = Stripe(CONFIG.STRIPE_API_KEY);
+    stripe.handleCardAction(paymentIntentSecret).then(function (result) {
+        if (result.error) {
+          // Show error in payment form
+          console.log(result.error);
+          document.getElementById('error-message').innerHTML = result.error;
+          document.getElementById('container-error').style.display = 'block';
+        } else {
+          console.log(result);
+          document.getElementById('container-success').style.display = 'block';
+
+          fetch('https://api.builton.dev/payments/' + paymentId + '/confirm', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              payment_intent_id: result.paymentIntent.id,
+              payment_client_secret: paymentIntentSecret
+            })
+          }).then(function (confirmResult) {
+            if (!confirmResult.ok) {
+              document.getElementById('error-message').innerHTML = 'Payment confirmation failed. Please contact us through support.';
+              document.getElementById('container-error').style.display = 'block';
+            } else {
+              document.getElementById('container-success').style.display = 'block';
+            }
+          });
+        }
+    }).catch(function (err) {
+      document.getElementById('container-error').style.display = 'block';
+    });
+</script>
+
+</html>
