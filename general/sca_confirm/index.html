@@ -51,7 +51,7 @@
         } else {
           showSuccess();
 
-          fetch('https://qa.builton.dev/payments/' + paymentId + '/confirm', {
+          fetch('https://api.builton.dev/payments/' + paymentId + '/confirm', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
