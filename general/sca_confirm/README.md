@@ -4,7 +4,7 @@ This example demonstrates how to confirm a payment with Stripe if the user has b
 It expects the Stripe payment intent secret and the payment id in the url in the format `https://example.com?PAYMENT_INTENT_CLIENT_SECRET={INSERT_INTENT}&PAYMENT_ID={INSERT_ID}`
 It uses:
 - The **[Stripe JS SDK](https://stripe.com/docs/stripe-js/elements/quickstart)**
-- A **Stripe API** Key, you can find or create one through [Stripe](https://dashboard.stripe.com/apikeys) dashboard.
+- A **Stripe Publishable API** Key, you can find or create one through [Stripe](https://dashboard.stripe.com/apikeys) dashboard.
 
 # Install Locally
 
