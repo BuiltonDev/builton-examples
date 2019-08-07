@@ -19,6 +19,17 @@
     </div>
 </body>
 <script>
+    function showError(msg) {
+      document.getElementById('error-message').innerHTML = msg || 'Authentication of payment failed';
+      document.getElementById('container-error').style.display = 'block';
+      document.getElementById('container-success').style.display = 'none';
+    }
+
+    function showSuccess() {
+      document.getElementById('container-error').style.display = 'none';
+      document.getElementById('container-success').style.display = 'block';
+    }
+
     const CONFIG = {
       STRIPE_API_KEY: 'YOUR_STRIPE_PUBLISHABLE_API_KEY'
     };
@@ -29,22 +40,18 @@
     const paymentId = urlParams.get('PAYMENT_ID')
 
     if (!paymentIntentSecret) {
-      document.getElementById('error-message').innerHTML = 'Missing required payment intent secret. Please use the full url provided.';
-      document.getElementById('container-error').style.display = 'block';
+      showError('Missing required payment intent secret. Please use the full url provided.')
     }
 
     const stripe = Stripe(CONFIG.STRIPE_API_KEY);
     stripe.handleCardAction(paymentIntentSecret).then(function (result) {
         if (result.error) {
           // Show error in payment form
-          console.log(result.error);
-          document.getElementById('error-message').innerHTML = result.error;
-          document.getElementById('container-error').style.display = 'block';
+          showError(result.error);
         } else {
-          console.log(result);
-          document.getElementById('container-success').style.display = 'block';
+          showSuccess();
 
-          fetch('https://api.builton.dev/payments/' + paymentId + '/confirm', {
+          fetch('https://qa.builton.dev/payments/' + paymentId + '/confirm', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -53,15 +60,14 @@
             })
           }).then(function (confirmResult) {
             if (!confirmResult.ok) {
-              document.getElementById('error-message').innerHTML = 'Payment confirmation failed. Please contact us through support.';
-              document.getElementById('container-error').style.display = 'block';
+              showError('Payment confirmation failed. Please contact us through support.');
             } else {
               document.getElementById('container-success').style.display = 'block';
             }
           });
         }
     }).catch(function (err) {
-      document.getElementById('container-error').style.display = 'block';
+      showError();
     });
 </script>
 
