@@ -2,8 +2,12 @@ import csv
 import sys
 
 from builton_sdk import Builton
-from settings import CSV_DELIMITER, API_KEY, BEARER_TOKEN
 from termcolor import cprint
+
+try:
+    from settings import CSV_DELIMITER, API_KEY, BEARER_TOKEN
+except ImportError:
+    from settings_example import CSV_DELIMITER
 
 """
     MAPPING: Shopify and BuiltOn Product
@@ -25,13 +29,17 @@ from termcolor import cprint
 =======================================================
     Info: The field `properties` is a dictionary. You can fill it as you want, and the keys `grams`,
      `vendor` etc are just examples.
-    
+
 """
 
 
 def main(api_key=None, bearer_token=None):
-    api_key = api_key if api_key is not None else API_KEY
-    bearer_token = bearer_token if bearer_token is not None else BEARER_TOKEN
+    try:
+        api_key = api_key if api_key is not None else API_KEY
+        bearer_token = bearer_token if bearer_token is not None else BEARER_TOKEN
+    except NameError:
+        cprint("Missing API_KEY and BEARER_TOKEN in settings.py", "red")
+        return
 
     builton = Builton(api_key=api_key, bearer_token=bearer_token)
     cprint("BuiltOn SDK is ready!", "cyan")
