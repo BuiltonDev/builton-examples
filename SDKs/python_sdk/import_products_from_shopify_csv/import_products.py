@@ -24,7 +24,7 @@ from termcolor import cprint
     Variant Weight Unit |   properties['weight_unit']
 =======================================================
     Info: The field `properties` is a dictionary. You can fill it as you want, and the keys `grams`,
-     `vendor` etc are not set in stone. You can change them as you like.
+     `vendor` etc are just examples.
     
 """
 
