@@ -14,16 +14,15 @@ except ImportError:
 
         Shopify         |           BuiltOn
 =======================================================
+    Published           |   active
     Title               |   name
     Body (HTML)         |   description
     Handle              |   external_reference
     Vendor              |   properties['vendor']
     Type                |   tags
     Tags                |   tags
-    Published           |   active
     Image Src           |   image_url
     Variant Price       |   price
-    Variant Barecode    |   properties['barecode`]
     Variant Grams       |   properties['grams']
     Variant Weight Unit |   properties['weight_unit']
 =======================================================
@@ -53,49 +52,37 @@ def import_products(builton: Builton):
         for shopify_product in csv_reader:
             cprint("============================================================")
             try:
-                cprint("======================== Properties ========================")
-                vendor = shopify_product.get('Vendor')
-                cprint("Vendor: %s" % vendor, "cyan")
-                grams = shopify_product.get('Variant Grams')
-                cprint("Grams: %s" % grams, "cyan")
-                weight_unit = shopify_product.get('Variant Weight Unit')
-                cprint("Weight Unit: %s" % weight_unit, "cyan")
-
-                properties = {
-                    'vendor': vendor,
-                    'grams': grams,
-                    'weight_unit': weight_unit
-                }
-
-                cprint("=========================== Tags ===========================")
+                
+                cprint("=========================== Mappable attributes ===========================")             
+                
                 tags = shopify_product.get('Tags').split(',')
                 tags.append(shopify_product.get('Type'))
-                cprint("Tags: %s" % tags, "cyan")
-
-                cprint("=========================== Other ===========================")
-                active = parse_boolean_param(shopify_product.get('Published'))
-                cprint("Active: %s" % active, "cyan")
-                name = shopify_product.get('Title')
-                cprint("Name: %s" % name, "cyan")
-                description = shopify_product.get('Body (HTML)')
-                cprint("Description: %s" % description, "cyan")
-                price = float(shopify_product.get('Variant Price'))
-                cprint("Price: %s" % price, "cyan")
-                external_reference = shopify_product.get('Handle')
-                cprint("Handle | External Reference: %s" % external_reference, "cyan")
-                image_url = shopify_product.get('Image Src')
-                cprint("Image Url: %s" % image_url, "cyan")
-
+                
                 body = {
-                    'active': active,
-                    'name': name,
-                    'description': description,
-                    'price': price,
-                    'external_reference': external_reference,
+                    'active': parse_boolean_param(shopify_product.get('Published')),
+                    'name': shopify_product.get('Title'),
+                    'description': shopify_product.get('Body (HTML)'),
+                    'price': float(shopify_product.get('Variant Price')),
+                    'external_reference': shopify_product.get('Handle'),
                     'tags': tags,
-                    'properties': properties,
-                    'image_url': image_url
+                    'image_url': shopify_product.get('Image Src'),
+                    'properties': {
+                        'vendor': shopify_product.get('Vendor'),
+                        'grams': shopify_product.get('Variant Grams'),
+                        'weight_unit': shopify_product.get('Variant Weight Unit')
+                     }
                 }
+                
+                cprint("Active: %s" % properties.active, "cyan")
+                cprint("Name: %s" % properties.name, "cyan")
+                cprint("Description: %s" % properties.description, "cyan")
+                cprint("Handle: %s" % properties.external_reference, "cyan")
+                cprint("Vendor: %s" % properties.vendor, "cyan")
+                cprint("Tags: %s" % properties.tags, "cyan")
+                cprint("Image Url: %s" % properties.image_url, "cyan")
+                cprint("Price: %s" % properties.price, "cyan")                
+                cprint("Grams: %s" % properties.grams, "cyan")
+                cprint("Weight Unit: %s" % properties.weight_unit, "cyan")   
 
                 builton.product().create(body=body)
                 cprint("================== SUCCESSFULLY IMPORTED ===================", "green")
