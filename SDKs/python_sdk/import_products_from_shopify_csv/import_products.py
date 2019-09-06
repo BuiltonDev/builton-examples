@@ -10,7 +10,7 @@ except ImportError:
     from settings_example import CSV_DELIMITER
 
 """
-    MAPPING: Shopify and BuiltOn Product
+    MAPPING: Example Shopify product and BuiltOn Product
 
         Shopify         |           BuiltOn
 =======================================================
@@ -21,15 +21,15 @@ except ImportError:
     Type                |   tags
     Tags                |   tags
     Published           |   active
+    Image Src           |   image_url
     Variant Price       |   price
     Variant Barecode    |   properties['barecode`]
-    Image Src           |   image_url
     Variant Grams       |   properties['grams']
     Variant Weight Unit |   properties['weight_unit']
 =======================================================
-    Info: The field `properties` is a dictionary. You can fill it as you want, and the keys `grams`,
-     `vendor` etc are just examples.
-
+    Info: The field `properties` is a dynamic dictionary. You can fill it as you want, and the attributes `grams`,
+     `vendor` etc are just examples. These variant attributes where taken as an example from Shopify documentation
+     https://help.shopify.com/en/themes/liquid/objects/variant
 """
 
 
