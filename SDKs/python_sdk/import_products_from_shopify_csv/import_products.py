@@ -80,7 +80,7 @@ def import_products(builton: Builton):
                 cprint("Handle: %s" % body.get('external_reference'), "cyan")
                 cprint("Tags: %s" % body.get('tags'), "cyan")
                 cprint("Image Url: %s" % body.get('image_url'), "cyan")
-                cprint("Vendor: %s" % body.get('properties'.get('vendor'), "cyan")
+                cprint("Vendor: %s" % body.get('properties').get('vendor'), "cyan")
                 cprint("Grams: %s" % body.get('properties').get('grams'), "cyan")
                 cprint("Weight Unit: %s" % body.get('properties').get('weight_unit'), "cyan")
 
