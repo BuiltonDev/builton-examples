@@ -73,16 +73,16 @@ def import_products(builton: Builton):
                      }
                 }
                 
-                cprint("Active: %s" % properties.active, "cyan")
-                cprint("Name: %s" % properties.name, "cyan")
-                cprint("Description: %s" % properties.description, "cyan")
-                cprint("Handle: %s" % properties.external_reference, "cyan")
-                cprint("Vendor: %s" % properties.vendor, "cyan")
-                cprint("Tags: %s" % properties.tags, "cyan")
-                cprint("Image Url: %s" % properties.image_url, "cyan")
-                cprint("Price: %s" % properties.price, "cyan")                
-                cprint("Grams: %s" % properties.grams, "cyan")
-                cprint("Weight Unit: %s" % properties.weight_unit, "cyan")   
+                cprint("Active: %s" % body.get('active'), "cyan")
+                cprint("Name: %s" % body.get('name'), "cyan")
+                cprint("Description: %s" % body.get('description'), "cyan")
+                cprint("Price: %s" % body.get('price'), "cyan")
+                cprint("Handle: %s" % body.get('external_reference'), "cyan")
+                cprint("Tags: %s" % body.get('tags'), "cyan")
+                cprint("Image Url: %s" % body.get('image_url'), "cyan")
+                cprint("Vendor: %s" % body.get('properties'.get('vendor'), "cyan")
+                cprint("Grams: %s" % body.get('properties').get('grams'), "cyan")
+                cprint("Weight Unit: %s" % body.get('properties').get('weight_unit'), "cyan")
 
                 builton.product().create(body=body)
                 cprint("================== SUCCESSFULLY IMPORTED ===================", "green")
@@ -90,7 +90,6 @@ def import_products(builton: Builton):
             except Exception as error:
                 cprint("========================== ERROR ===========================", "red")
                 cprint("something wrong happened: %s" % error, "red")
-                cprint("product handle: %s" % shopify_product.get('Handle'), "yellow")
                 cprint("product csv: %s" % shopify_product, "yellow")
                 cprint("============================================================")
 
