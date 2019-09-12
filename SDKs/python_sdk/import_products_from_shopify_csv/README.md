@@ -24,7 +24,7 @@ In order to run this example locally, you need to:
 
     3.1. Run the script and add the BuiltOn API Key and the SA Key  when it asks
 
-    Run: `python import_products`
+    Run: `python import_products.py`
 
     3.2. Add and define the BuiltOn API Key and SA Key to a `settings.py` file. You can use the `setting_example.py` as a template
 
